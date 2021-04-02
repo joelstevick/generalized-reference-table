@@ -33,7 +33,7 @@ export class TableComponent implements OnInit, OnDestroy {
         }));
 
         if (config?.pagination === false) {
-          config.load({}, {}, {});
+          config.load({start: 0, end: 10}, {}, {});
           this.pagination = false;
          }
       }

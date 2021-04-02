@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { BehaviorSubject, Subject } from 'rxjs';
-import { AppComponent } from './app.component';
 import { bocServiceProviders, ombObjectCodes } from './db';
 import { HomeComponent } from './pages/home/home.component';
 import { TableComponent } from './pages/table/table.component';
@@ -19,7 +18,7 @@ const routes: Routes = [
         filterChanged$: new Subject()
       },
       _getOmbObjectCodes: function (pageOptions, filterOptions, sortOptions) {
-        return ombObjectCodes;;
+        return ombObjectCodes(pageOptions, filterOptions, sortOptions);
       },
       load: function (pageOptions, filterOptions, sortOptions) {
         const records: any[] = this._getOmbObjectCodes(pageOptions, filterOptions, sortOptions);
@@ -51,7 +50,6 @@ const routes: Routes = [
             headerName: 'Updated By',
             field: 'updatedBy'
           },
-
         ]
       }
     },
