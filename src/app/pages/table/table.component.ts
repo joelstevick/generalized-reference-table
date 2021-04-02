@@ -19,10 +19,9 @@ export class TableComponent implements OnInit{
 
   ngOnInit() {
     this.route.data.subscribe(
-      (config: Config) => {
+      async (config: Config) => {
         this.rowData = this.dataService.readall(config.readAll);
-
-        this.columnDefs = typeof config.columnDefs === 'function' ? config.columnDefs() : config.columnDefs;
+        this.columnDefs = typeof config.columnDefs === 'function' ? await config.columnDefs() : config.columnDefs;
       }
     )
   }

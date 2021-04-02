@@ -5,6 +5,10 @@ import { bocServiceProviders, ombObjectCodes } from './db';
 import { HomeComponent } from './pages/home/home.component';
 import { TableComponent } from './pages/table/table.component';
 
+const hide = (hidden: boolean) => {
+  return hidden
+}
+
 const routes: Routes = [
   { path: '', component: HomeComponent },
   {
@@ -12,7 +16,7 @@ const routes: Routes = [
       readAll: () => {
         return ombObjectCodes;
       },
-      columnDefs: () => {
+      columnDefs: async () => {
         return [
           {
             headerName: 'Code',
@@ -71,7 +75,8 @@ const routes: Routes = [
         },
         {
           headerName: 'Created By',
-          field: 'createdBy'
+          field: 'createdBy',
+          hide: hide(true)
         },
         {
           headerName: 'Updated By',
