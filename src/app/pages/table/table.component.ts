@@ -22,7 +22,7 @@ export class TableComponent implements OnInit{
       (config: Config) => {
         this.rowData = this.dataService.readall(config.readAll);
 
-        this.columnDefs = config.columnDefs;
+        this.columnDefs = typeof config.columnDefs === 'function' ? config.columnDefs() : config.columnDefs;
       }
     )
   }

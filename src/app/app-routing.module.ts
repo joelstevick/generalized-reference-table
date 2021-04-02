@@ -12,29 +12,31 @@ const routes: Routes = [
       readAll: () => {
         return ombObjectCodes;
       },
-      columnDefs: [
-        {
-          headerName: 'Code',
-          field: 'code'
-        },
-        {
-          headerName: 'Description',
-          field: 'description'
-        },
-        {
-          headerName: 'OMB Object Group',
-          field: 'ombObjectGroup'
-        },
-        {
-          headerName: 'Created By',
-          field: 'createdBy'
-        },
-        {
-          headerName: 'Updated By',
-          field: 'updatedBy'
-        },
-      
-      ]
+      columnDefs: () => {
+        return [
+          {
+            headerName: 'Code',
+            field: 'code'
+          },
+          {
+            headerName: 'Description',
+            field: 'description'
+          },
+          {
+            headerName: 'OMB Object Group',
+            field: 'ombObjectGroup'
+          },
+          {
+            headerName: 'Created By',
+            field: 'createdBy'
+          },
+          {
+            headerName: 'Updated By',
+            field: 'updatedBy'
+          },
+
+        ]
+      }
     },
   },
   {
