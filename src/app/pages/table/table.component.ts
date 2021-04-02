@@ -30,7 +30,7 @@ export class TableComponent implements OnInit, OnDestroy {
 
         this.columnDefs = typeof config.columnDefs === 'function' ? await config.columnDefs() : config.columnDefs;
 
-        config.load({}, {}, {});
+        if (config?.pagination === false) { config.load({}, {}, {}); }
       }
     )
   }

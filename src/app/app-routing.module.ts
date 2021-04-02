@@ -73,6 +73,7 @@ const routes: Routes = [
       dataRecords$: function () {
         return this._context.dataRecords$.asObservable();
       },
+      pagination: false,
       columnDefs: [
         {
           headerName: 'Number',
