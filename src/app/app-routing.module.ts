@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { BehaviorSubject, Subject } from 'rxjs';
 import { AppComponent } from './app.component';
 import { bocServiceProviders, ombObjectCodes } from './db';
 import { HomeComponent } from './pages/home/home.component';
@@ -13,8 +14,20 @@ const routes: Routes = [
   { path: '', component: HomeComponent },
   {
     path: 'omb-object-codes', component: TableComponent, data: {
-      readAll: () => {
-        return ombObjectCodes;
+      context: {
+        dataRecords$: new BehaviorSubject<any[]>([]),
+        filterChanged$: new Subject()
+      },
+      getOmbObjectCodes: function (pageOptions, filterOptions, sortOptions) {
+        return ombObjectCodes;;
+      },
+      load: function (pageOptions, filterOptions, sortOptions) {
+        const records: any[] = this.getOmbObjectCodes(pageOptions, filterOptions, sortOptions);
+
+        this.context.dataRecords$.next(records);
+      },
+      dataRecords$: function () {
+        return this.context.dataRecords$.asObservable();
       },
       columnDefs: async () => {
         return [
@@ -45,9 +58,7 @@ const routes: Routes = [
   },
   {
     path: 'boc-service-providers', component: TableComponent, data: {
-      readAll: () => {
-        return bocServiceProviders;
-      },
+
       columnDefs: [
         {
           headerName: 'Number',
