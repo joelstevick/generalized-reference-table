@@ -14,20 +14,20 @@ const routes: Routes = [
   { path: '', component: HomeComponent },
   {
     path: 'omb-object-codes', component: TableComponent, data: {
-      context: {
+      _context: {
         dataRecords$: new BehaviorSubject<any[]>([]),
         filterChanged$: new Subject()
       },
-      getOmbObjectCodes: function (pageOptions, filterOptions, sortOptions) {
+      _getOmbObjectCodes: function (pageOptions, filterOptions, sortOptions) {
         return ombObjectCodes;;
       },
       load: function (pageOptions, filterOptions, sortOptions) {
-        const records: any[] = this.getOmbObjectCodes(pageOptions, filterOptions, sortOptions);
+        const records: any[] = this._getOmbObjectCodes(pageOptions, filterOptions, sortOptions);
 
-        this.context.dataRecords$.next(records);
+        this._context.dataRecords$.next(records);
       },
       dataRecords$: function () {
-        return this.context.dataRecords$.asObservable();
+        return this._context.dataRecords$.asObservable();
       },
       columnDefs: async () => {
         return [
