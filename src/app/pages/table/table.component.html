@@ -4,3 +4,7 @@
     [rowData]="rowData"
     [columnDefs]="columnDefs">
 </ag-grid-angular>
+<app-paginator
+  *ngIf="pagination"
+  [load]="load">
+</app-paginator>
