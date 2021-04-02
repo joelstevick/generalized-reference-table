@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Data } from '@angular/router';
+import { Config } from 'src/app/config/config.interface';
 import { DataServiceService } from 'src/app/services/data-service.service';
 
 @Component({
@@ -18,18 +19,10 @@ export class TableComponent implements OnInit{
 
   ngOnInit() {
     this.route.data.subscribe(
-      (data: Data) => {
-        if (data['table'] === "omb-object-codes") {
-          this.rowData = this.dataService.ombObjectCodes()
-          this.columnDefs = Object.keys(this.dataService.ombObjectCodes()[0]).map(field => {
-            return {headerName: field, field: field}
-          })
-        } else {
-          this.rowData = this.dataService.bocServiceProviders()
-          this.columnDefs = Object.keys(this.dataService.bocServiceProviders()[0]).map(field => {
-            return {headerName: field, field: field}
-          })
-        }
+      (config: Config) => {
+        this.rowData = this.dataService.readall(config.readAll);
+
+        this.columnDefs = config.columnDefs;
       }
     )
   }
