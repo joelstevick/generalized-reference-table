@@ -58,7 +58,21 @@ const routes: Routes = [
   },
   {
     path: 'boc-service-providers', component: TableComponent, data: {
+      _context: {
+        dataRecords$: new BehaviorSubject<any[]>([]),
+        filterChanged$: new Subject()
+      },
+      _getBocServiceProviders: function (pageOptions, filterOptions, sortOptions) {
+        return bocServiceProviders;;
+      },
+      load: function (pageOptions, filterOptions, sortOptions) {
+        const records: any[] = this._getBocServiceProviders(pageOptions, filterOptions, sortOptions);
 
+        this._context.dataRecords$.next(records);
+      },
+      dataRecords$: function () {
+        return this._context.dataRecords$.asObservable();
+      },
       columnDefs: [
         {
           headerName: 'Number',

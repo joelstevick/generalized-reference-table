@@ -2,7 +2,6 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Data } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Config } from 'src/app/config/config.interface';
-import { DataServiceService } from 'src/app/services/data-service.service';
 
 @Component({
   selector: 'app-table',
@@ -17,7 +16,6 @@ export class TableComponent implements OnInit, OnDestroy {
 
   constructor(
     private route: ActivatedRoute,
-    private dataService: DataServiceService
   ) { }
 
   ngOnDestroy() {
