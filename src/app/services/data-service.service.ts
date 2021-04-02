@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 import { ReadAllQuery } from '../config/read-all.query.type';
 
 @Injectable({
@@ -8,7 +9,7 @@ export class DataServiceService {
 
   constructor() { }
 
-  readall(query: ReadAllQuery) {
+  readall(query: ReadAllQuery, pageOptions: any, filterOptions: any, sortOptions: any) {
     return query();
   }
 
