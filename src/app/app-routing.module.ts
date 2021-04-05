@@ -40,7 +40,8 @@ const routes: Routes = [
           },
           {
             headerName: 'OMB Object Group',
-            field: 'ombObjectGroup'
+            field: 'ombObjectGroup',
+            valueFormatter: (params) => params.value ? params.value.description : null
           },
           {
             headerName: 'Created By',
