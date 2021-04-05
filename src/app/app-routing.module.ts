@@ -13,21 +13,27 @@ const routes: Routes = [
   { path: '', component: HomeComponent },
   {
     path: 'omb-object-codes', component: TableComponent, data: {
+  
+      // stores required BehaviorSubject instances
       _context: {
         dataRecords$: new BehaviorSubject<any[]>([]),
         filterChanged$: new Subject()
       },
+      // this is how data is retrieved from the (graphql) database
       _getOmbObjectCodes: function (pageOptions, filterOptions, sortOptions) {
         return ombObjectCodes(pageOptions, filterOptions, sortOptions);
       },
+      // this function is called from the paginator when navigation events are signalled by the table
       load: function (pageOptions, filterOptions, sortOptions) {
         const records: any[] = this._getOmbObjectCodes(pageOptions, filterOptions, sortOptions);
 
         this._context.dataRecords$.next(records);
       },
+      // stream that the table component listens-on
       dataRecords$: function () {
         return this._context.dataRecords$.asObservable();
       },
+      // ag-grid column metadata
       columnDefs: async () => {
         return [
           {
