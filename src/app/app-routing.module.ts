@@ -14,6 +14,7 @@ const routes: Routes = [
   {
     path: 'omb-object-codes', component: TableComponent, data: {
 
+      // private
       // stores required BehaviorSubject instances
       _context: {
         pageRecords$: new BehaviorSubject<any[]>([]),
@@ -23,6 +24,7 @@ const routes: Routes = [
       _getOmbObjectCodes: function (pageOptions, filterOptions, sortOptions) {
         return ombObjectCodes(pageOptions, filterOptions, sortOptions);
       },
+      // public api
       // this function is called from the paginator when navigation events are signalled by the table
       loadPage: function (pageOptions, filterOptions, sortOptions) {
         const records: any[] = this._getOmbObjectCodes(pageOptions, filterOptions, sortOptions);
