@@ -6,30 +6,30 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./paginator.component.css']
 })
 export class PaginatorComponent implements OnInit {
-  @Input() load: any;
+  @Input() loadPage: any;
   start: number = 0;
   end: number = 10;
 
   constructor() { }
 
   ngOnInit(): void {
-    this.loadData()
+    this.loadCurrentPage()
   }
 
   nextPage() {
     this.start += 10;
     this.end += 10
-    this.loadData()
+    this.loadCurrentPage()
   }
 
   previousPage() {
     this.start -= 10;
     this.end -= 10
-    this.loadData()
+    this.loadCurrentPage()
   }
 
-  loadData() {
-    this.load({start: this.start, end: this.end}, {}, {})
+  loadCurrentPage() {
+    this.loadPage({start: this.start, end: this.end}, {}, {})
   }
 
 }

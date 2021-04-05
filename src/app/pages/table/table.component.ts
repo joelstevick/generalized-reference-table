@@ -12,7 +12,7 @@ export class TableComponent implements OnInit, OnDestroy {
   columnDefs;
   rowData;
   pagination: boolean = true;
-  load;
+  loadPage;
 
   subscriptions = new Subscription();
 
@@ -24,16 +24,16 @@ export class TableComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.route.data.subscribe(
       async (config: Config) => {
-        this.load = config.load.bind(config)
+        this.loadPage = config.loadPage.bind(config)
         this.columnDefs = typeof config.columnDefs === 'function' ? await config.columnDefs() : config.columnDefs;
 
-        this.subscriptions.add(config.dataRecords$().subscribe(records => {
+        this.subscriptions.add(config.pageRecords$().subscribe(records => {
           this.rowData = records;
           this.changeDetectorRef.detectChanges()
         }));
 
         if (config?.pagination === false) {
-          config.load({start: 0, end: 10}, {}, {});
+          config.loadPage({start: 0, end: 10}, {}, {});
           this.pagination = false;
          }
       }
