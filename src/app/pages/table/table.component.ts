@@ -29,7 +29,7 @@ export class TableComponent implements OnInit, OnDestroy {
         this.columnDefs = typeof config.columnDefs === 'function' ? await config.columnDefs() : config.columnDefs;
 
         this.subscriptions.add(config.pageRecords$().subscribe(records => {
-          this.rowData = [...records];
+          this.rowData = [...records]; // copy data in order for change detection to work properly
         }));
 
         if (config?.pagination === false) {
