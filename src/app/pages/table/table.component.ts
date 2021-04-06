@@ -54,8 +54,7 @@ export class TableComponent implements OnInit, OnDestroy {
     this.createConfig.handler(formData);
   }
 
-  openDeletePrompt(event) {
-    console.log(event)
+  openModal(event) {
     const id = event.data.id
     if (event.colDef.field === "delete") {
       if (confirm(this.deleteConfig.label)) {
