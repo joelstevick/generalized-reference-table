@@ -1,6 +1,5 @@
 import { BehaviorSubject, Subject } from "rxjs";
-import { ombObjectCodes, ombocs } from "src/app/db/omb-object-codes.db";
-
+import { findAll, getOmbObjectCodesDb } from "src/app/db/omb-object-codes.db";
 export const ombObjectCodesConfig = {
     // private
     // stores required BehaviorSubject instances
@@ -10,7 +9,7 @@ export const ombObjectCodesConfig = {
     },
     // this is how data is retrieved from the (graphql) database
     _getOmbObjectCodes: function (pageOptions, filterOptions, sortOptions) {
-        return ombObjectCodes(pageOptions, filterOptions, sortOptions);
+        return findAll(pageOptions, filterOptions, sortOptions);
     },
     // public api
     // this function is called from the paginator when navigation events are signalled by the table
@@ -61,7 +60,7 @@ export const ombObjectCodesConfig = {
             createUpdate: {
                 label: `Add`,
                 handler: function (code) {
-                    ombocs.push({
+                    getOmbObjectCodesDb().push({
                         code,
                         description: '',
                         ombObjectGroup: {
