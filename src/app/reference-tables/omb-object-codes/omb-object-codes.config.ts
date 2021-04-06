@@ -71,7 +71,6 @@ export const ombObjectCodesConfig = {
                         createdBy: 111,
                         updatedBy: 111,
                     });
-
                 }
             },
             delete: {
@@ -81,6 +80,5 @@ export const ombObjectCodesConfig = {
                 }
             }
         }
-
     }
 }

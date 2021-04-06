@@ -63,5 +63,38 @@ export const bocServiceProvidersConfig = {
             headerName: 'Updated By',
             field: 'updatedBy'
         },
-    ]
+    ],
+    // user interface controls
+    ui: {
+      buttons: {
+          download: {
+              label: 'Download to Excel',
+              handler: function (args) {
+                  console.log(this.label, args);
+              },
+          },
+          createUpdate: {
+              label: `Add`,
+              handler: function (suffix) {
+                bocServiceProviders.push({
+                      number: null,
+                      suffix,
+                      name: '',
+                      longName: '',
+                      keyWords: '',
+                      narrative: '',
+                      createdBy: 111,
+                      updatedBy: 111,
+                  });
+                  bocServiceProvidersConfig.loadPage(null, null, null)
+              }
+          },
+          delete: {
+              label: 'Delete',
+              handler: function (args) {
+                  console.log(this.label, args);
+              }
+          }
+      }
+    }
 }
