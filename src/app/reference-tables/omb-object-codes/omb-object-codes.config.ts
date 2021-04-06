@@ -48,5 +48,32 @@ export const ombObjectCodesConfig = {
                 field: 'updatedBy'
             },
         ]
+    },
+    ui: {
+        buttons: [
+            {
+                id: 'download',
+                label: 'Download to Excel',
+                handler: function (args) {
+                    console.log(this.id, args);
+                },
+            },
+            {
+                id: 'create-update',
+                label: `Add`,
+                handler: function (args) {
+                    console.log(this.id, args);
+                }
+            },
+            {
+                id: 'delete',
+                label: 'Delete',
+                handler: function (args) {
+                    console.log(this.id, args);
+                }
+            }
+
+        ]
+
     }
 }
