@@ -1,5 +1,6 @@
 import { BehaviorSubject, Subject } from "rxjs";
-import { findAll, getOmbObjectCodesDb } from "src/app/db/omb-object-codes.db";
+import * as FileSaver from 'file-saver';
+import { findAll, getOmbObjectCodesDb, setOmbObjectCodesDb } from "src/app/db/omb-object-codes.db";
 export const ombObjectCodesConfig = {
     // private
     // stores required BehaviorSubject instances
@@ -52,15 +53,19 @@ export const ombObjectCodesConfig = {
     ui: {
         buttons: {
             download: {
-                label: 'Download to Excel',
-                handler: function (args) {
-                    console.log(this.label, args);
+                handler: function () {
+                  const data = JSON.stringify(getOmbObjectCodesDb())
+                  const blob = new Blob([data], {
+                    type: "text/plain;charset=utf-8"
+                  });
+                  FileSaver.saveAs(blob, "ombobjectcodes")
                 },
             },
             createUpdate: {
                 label: `Add`,
                 handler: function (code) {
                     getOmbObjectCodesDb().push({
+                        id: getOmbObjectCodesDb().length + 1,
                         code,
                         description: '',
                         ombObjectGroup: {
@@ -75,8 +80,10 @@ export const ombObjectCodesConfig = {
             },
             delete: {
                 label: 'Delete OMB Object Code',
-                handler: function (args) {
-                    console.log(this.label, args);
+                handler: function (id) {
+                    let ombocs = getOmbObjectCodesDb().filter(omboc => omboc.id !== id)
+                    setOmbObjectCodesDb(ombocs)
+                    ombObjectCodesConfig.loadPage({start: 0, end: 10}, null, null)
                 }
             }
         }

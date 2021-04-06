@@ -15,6 +15,7 @@ export class TableComponent implements OnInit, OnDestroy {
   loadPage;
   addUpdateConfig;
   deleteConfig;
+  downloadConfig;
 
   subscriptions = new Subscription();
 
@@ -28,6 +29,7 @@ export class TableComponent implements OnInit, OnDestroy {
         this.loadPage = config.loadPage.bind(config)
         this.addUpdateConfig = config.ui.buttons.createUpdate
         this.deleteConfig = config.ui.buttons.delete
+        this.downloadConfig = config.ui.buttons.download
         this.columnDefs = typeof config.columnDefs === 'function' ? await config.columnDefs() : config.columnDefs;
 
         this.subscriptions.add(config.pageRecords$().subscribe(records => {

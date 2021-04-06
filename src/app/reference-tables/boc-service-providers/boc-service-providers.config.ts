@@ -1,4 +1,5 @@
 import { BehaviorSubject, Subject } from "rxjs";
+import * as FileSaver from 'file-saver';
 import { getBocServiceProviderDb, setBocServiceProviderDb } from "src/app/db/boc-service-providers.db";
 
 const hide = (hidden: boolean) => {
@@ -73,15 +74,19 @@ export const bocServiceProvidersConfig = {
       buttons: {
           download: {
               label: 'Download to Excel',
-              handler: function (args) {
-                  console.log(this.label, args);
+              handler: function () {
+                  const data = JSON.stringify(getBocServiceProviderDb())
+                  const blob = new Blob([data], {
+                    type: "text/plain;charset=utf-8"
+                  });
+                  FileSaver.saveAs(blob, "bocserviceproviders")
               },
           },
           createUpdate: {
               label: `Add`,
               handler: function (suffix) {
                 getBocServiceProviderDb().push({
-                      id: null,
+                      id: getBocServiceProviderDb().length + 1,
                       number: null,
                       suffix,
                       name: '',

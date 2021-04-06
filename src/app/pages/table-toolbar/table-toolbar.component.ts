@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-table-toolbar',
@@ -6,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./table-toolbar.component.css']
 })
 export class TableToolbarComponent implements OnInit {
+  @Input() buttons: any;
+  @Output() downloadClicked = new EventEmitter()
 
   constructor() { }
 
