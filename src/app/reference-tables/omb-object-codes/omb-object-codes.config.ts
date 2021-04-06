@@ -69,6 +69,8 @@ export const ombObjectCodesConfig = {
                         createdBy: 111,
                         updatedBy: 111,
                     });
+
+                    ombObjectCodesConfig.loadPage(null, null, null)
                 }
             },
             delete: {
