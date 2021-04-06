@@ -19,7 +19,6 @@ export class TableComponent implements OnInit, OnDestroy {
 
   constructor(
     private route: ActivatedRoute,
-    private changeDetectorRef: ChangeDetectorRef
   ) { }
 
   ngOnInit() {
@@ -30,14 +29,13 @@ export class TableComponent implements OnInit, OnDestroy {
         this.columnDefs = typeof config.columnDefs === 'function' ? await config.columnDefs() : config.columnDefs;
 
         this.subscriptions.add(config.pageRecords$().subscribe(records => {
-          this.rowData = records;
-          this.changeDetectorRef.detectChanges()
+          this.rowData = [...records];
         }));
 
         if (config?.pagination === false) {
-          config.loadPage({start: 0, end: 10}, {}, {});
+          config.loadPage({ start: 0, end: 10 }, {}, {});
           this.pagination = false;
-         }
+        }
       }
     )
   }
