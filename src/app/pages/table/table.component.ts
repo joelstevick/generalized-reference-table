@@ -13,7 +13,8 @@ export class TableComponent implements OnInit, OnDestroy {
   rowData;
   pagination: boolean = true;
   loadPage;
-  addUpdateConfig;
+  createConfig;
+  updateConfig;
   deleteConfig;
   downloadConfig;
 
@@ -27,13 +28,17 @@ export class TableComponent implements OnInit, OnDestroy {
     this.route.data.subscribe(
       async (config: Config) => {
         this.loadPage = config.loadPage.bind(config)
-        this.addUpdateConfig = config.ui.buttons.createUpdate
+        this.createConfig = config.ui.buttons.create
+        this.updateConfig = config.ui.buttons.update
         this.deleteConfig = config.ui.buttons.delete
         this.downloadConfig = config.ui.buttons.download
         this.columnDefs = typeof config.columnDefs === 'function' ? await config.columnDefs() : config.columnDefs;
+        this.columnDefs.push({headerName: "Delete", field: 'delete'})
+        this.columnDefs.push({headerName: "Edit", field: "edit"})
 
         this.subscriptions.add(config.pageRecords$().subscribe(records => {
-          this.rowData = [...records]; // copy data in order for change detection to work properly
+          let rows = records.map(record => {return {...record, edit: "EDIT", delete: "DELETE"}})
+          this.rowData = rows; // copy data in order for change detection to work properly
         }));
 
         if (config?.pagination === false) {
@@ -46,13 +51,19 @@ export class TableComponent implements OnInit, OnDestroy {
 
   handleAddClick() {
     const formData = prompt('Enter data')
-    this.addUpdateConfig.handler(formData);
+    this.createConfig.handler(formData);
   }
 
   openDeletePrompt(event) {
+    console.log(event)
     const id = event.data.id
-    if (confirm(this.deleteConfig.label)) {
-      this.deleteConfig.handler(id)
+    if (event.colDef.field === "delete") {
+      if (confirm(this.deleteConfig.label)) {
+        this.deleteConfig.handler(id)
+      }
+    } else if (event.colDef.field === "edit") {
+      const formData = prompt('Update', event.data[this.updateConfig.key])
+      this.updateConfig.handler(id, formData);
     }
   }
 

@@ -82,7 +82,7 @@ export const bocServiceProvidersConfig = {
                   FileSaver.saveAs(blob, "bocserviceproviders")
               },
           },
-          createUpdate: {
+          create: {
               label: `Add`,
               handler: function (suffix) {
                 getBocServiceProviderDb().push({
@@ -98,6 +98,19 @@ export const bocServiceProvidersConfig = {
                   });
                   bocServiceProvidersConfig.loadPage(null, null, null)
               }
+          },
+          update: {
+            key: 'suffix',
+            handler: function (id, suffix) {
+              let updatedBocs = getBocServiceProviderDb().map(boc => {
+                if (boc.id === id) {
+                  boc.suffix = suffix
+                }
+                return boc
+              })
+              setBocServiceProviderDb(updatedBocs)
+              bocServiceProvidersConfig.loadPage({start: 0, end: 10}, null, null)
+            }
           },
           delete: {
               label: 'Delete BOC Service Provider',

@@ -61,7 +61,7 @@ export const ombObjectCodesConfig = {
                   FileSaver.saveAs(blob, "ombobjectcodes")
                 },
             },
-            createUpdate: {
+            create: {
                 label: `Add`,
                 handler: function (code) {
                     getOmbObjectCodesDb().push({
@@ -77,6 +77,19 @@ export const ombObjectCodesConfig = {
 
                     ombObjectCodesConfig.loadPage(null, null, null)
                 }
+            },
+            update: {
+              key: 'code',
+              handler: function (id, code) {
+                let updatedOmbocs = getOmbObjectCodesDb().map(omboc => {
+                  if (omboc.id === id) {
+                    omboc.code = code
+                  }
+                  return omboc
+                })
+                setOmbObjectCodesDb(updatedOmbocs)
+                ombObjectCodesConfig.loadPage({start: 0, end: 10}, null, null)
+              }
             },
             delete: {
                 label: 'Delete OMB Object Code',
