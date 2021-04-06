@@ -6,4 +6,5 @@ export interface Config {
     loadPage: (whereOptions, filterOptions, sortOptions) => void;
     pageRecords$: () => Observable<any[]>;
     pagination?: boolean;
+    ui: any;
 }

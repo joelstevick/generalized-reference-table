@@ -50,30 +50,26 @@ export const ombObjectCodesConfig = {
         ]
     },
     ui: {
-        buttons: [
-            {
-                id: 'download',
+        buttons: {
+            download: {
                 label: 'Download to Excel',
                 handler: function (args) {
-                    console.log(this.id, args);
+                    console.log(this.label, args);
                 },
             },
-            {
-                id: 'create-update',
+            createUpdate: {
                 label: `Add`,
                 handler: function (args) {
-                    console.log(this.id, args);
+                    console.log(this.label, args);
                 }
             },
-            {
-                id: 'delete',
+            delete: {
                 label: 'Delete',
                 handler: function (args) {
-                    console.log(this.id, args);
+                    console.log(this.label, args);
                 }
             }
-
-        ]
+          }
 
     }
 }

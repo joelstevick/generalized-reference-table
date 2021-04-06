@@ -1,7 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { BehaviorSubject, Subject } from 'rxjs';
-import { bocServiceProviders, ombObjectCodes } from './db';
 import { HomeComponent } from './pages/home/home.component';
 import { TableComponent } from './pages/table/table.component';
 import { bocServiceProvidersConfig } from './reference-tables/boc-service-providers/boc-service-providers.config';

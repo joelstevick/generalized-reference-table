@@ -1,10 +1,18 @@
+<app-table-toolbar></app-table-toolbar>
+<br><br>
 <ag-grid-angular
-    style="height: 500px;"
+    style="height: 315px;"
     class="ag-theme-balham"
     [rowData]="rowData"
     [columnDefs]="columnDefs">
 </ag-grid-angular>
+<br>
 <app-paginator
   *ngIf="pagination"
   [loadPage]="loadPage">
 </app-paginator>
+<button
+  style="float: right"
+  (click)="handleAddClick()">
+  Add
+</button>
