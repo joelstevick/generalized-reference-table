@@ -1,5 +1,5 @@
 import { BehaviorSubject, Subject } from "rxjs";
-import { bocServiceProviders } from "src/app/db";
+import { getBocServiceProviderDb, setBocServiceProviderDb } from "src/app/db/boc-service-providers.db";
 
 const hide = (hidden: boolean) => {
     return hidden
@@ -14,7 +14,7 @@ export const bocServiceProvidersConfig = {
     },
      // this is how data is retrieved from the (graphql) database
     _getBocServiceProviders: function (pageOptions, filterOptions, sortOptions) {
-        return bocServiceProviders;;
+        return getBocServiceProviderDb();
     },
     // public api
     // this function is called from the paginator when navigation events are signalled by the table
@@ -30,6 +30,10 @@ export const bocServiceProvidersConfig = {
     pagination: false,
     // ag-grid column metadata
     columnDefs: [
+        {
+            field: 'id',
+            hide: hide(true)
+        },
         {
             headerName: 'Number',
             field: 'number'
@@ -76,7 +80,8 @@ export const bocServiceProvidersConfig = {
           createUpdate: {
               label: `Add`,
               handler: function (suffix) {
-                bocServiceProviders.push({
+                getBocServiceProviderDb().push({
+                      id: null,
                       number: null,
                       suffix,
                       name: '',
@@ -90,9 +95,11 @@ export const bocServiceProvidersConfig = {
               }
           },
           delete: {
-              label: 'Delete',
-              handler: function (args) {
-                  console.log(this.label, args);
+              label: 'Delete BOC Service Provider',
+              handler: function (id) {
+                let bocServiceProviders = getBocServiceProviderDb().filter(boc => boc.id !== id)
+                setBocServiceProviderDb(bocServiceProviders)
+                bocServiceProvidersConfig.loadPage(null, null, null)
               }
           }
       }

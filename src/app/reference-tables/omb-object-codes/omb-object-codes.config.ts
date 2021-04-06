@@ -1,6 +1,5 @@
 import { BehaviorSubject, Subject } from "rxjs";
-import { ombObjectCodes } from "src/app/db";
-import { ombocs } from "src/app/db/omb-object-codes.db";
+import { ombObjectCodes, ombocs } from "src/app/db/omb-object-codes.db";
 
 export const ombObjectCodesConfig = {
     // private
@@ -74,7 +73,7 @@ export const ombObjectCodesConfig = {
                 }
             },
             delete: {
-                label: 'Delete',
+                label: 'Delete OMB Object Code',
                 handler: function (args) {
                     console.log(this.label, args);
                 }

@@ -14,6 +14,7 @@ export class TableComponent implements OnInit, OnDestroy {
   pagination: boolean = true;
   loadPage;
   addUpdateConfig;
+  deleteConfig;
 
   subscriptions = new Subscription();
 
@@ -26,6 +27,7 @@ export class TableComponent implements OnInit, OnDestroy {
       async (config: Config) => {
         this.loadPage = config.loadPage.bind(config)
         this.addUpdateConfig = config.ui.buttons.createUpdate
+        this.deleteConfig = config.ui.buttons.delete
         this.columnDefs = typeof config.columnDefs === 'function' ? await config.columnDefs() : config.columnDefs;
 
         this.subscriptions.add(config.pageRecords$().subscribe(records => {
@@ -43,6 +45,13 @@ export class TableComponent implements OnInit, OnDestroy {
   handleAddClick() {
     const formData = prompt('Enter data')
     this.addUpdateConfig.handler(formData);
+  }
+
+  openDeletePrompt(event) {
+    const id = event.data.id
+    if (confirm(this.deleteConfig.label)) {
+      this.deleteConfig.handler(id)
+    }
   }
 
   ngOnDestroy() {
