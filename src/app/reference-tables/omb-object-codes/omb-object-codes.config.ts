@@ -49,6 +49,7 @@ export const ombObjectCodesConfig = {
             },
         ]
     },
+    // user interface controls
     ui: {
         buttons: [
             {
