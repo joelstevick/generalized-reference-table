@@ -43,7 +43,8 @@ export class TableComponent implements OnInit, OnDestroy {
   }
 
   handleAddClick() {
-    this.addUpdateConfig.handler("test")
+    const results = prompt('Enter name')
+    this.addUpdateConfig.handler(results);
   }
 
   ngOnDestroy() {

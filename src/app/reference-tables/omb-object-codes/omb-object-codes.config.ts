@@ -1,5 +1,6 @@
 import { BehaviorSubject, Subject } from "rxjs";
 import { ombObjectCodes } from "src/app/db";
+import { ombocs } from "src/app/db/omb-object-codes.db";
 
 export const ombObjectCodesConfig = {
     // private
@@ -60,8 +61,17 @@ export const ombObjectCodesConfig = {
             },
             createUpdate: {
                 label: `Add`,
-                handler: function (args) {
-                    console.log(this.label, args);
+                handler: function (code) {
+                    ombocs.push({
+                        code,
+                        description: '',
+                        ombObjectGroup: {
+                            description: '',
+                        },
+                        createdBy: 111,
+                        updatedBy: 111,
+                    });
+
                 }
             },
             delete: {
@@ -70,7 +80,7 @@ export const ombObjectCodesConfig = {
                     console.log(this.label, args);
                 }
             }
-          }
+        }
 
     }
 }

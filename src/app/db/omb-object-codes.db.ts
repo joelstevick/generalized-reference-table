@@ -9,7 +9,7 @@ export interface OmbObjectCode {
     updatedBy: number;
 }
 
-const ombocs = [
+export const ombocs = [
   { code: "73.0", description: "Travel", ombObjectGroup: { description: "Travel" }, createdBy: 111111, updatedBy: 111111 },
   { code: "71.0", description: "Training", ombObjectGroup: { description: "Training" }, createdBy: 333333, updatedBy: 333333 },
   { code: "11.2", description: "Pay", ombObjectGroup: { description: "Pay and Benefits" }, createdBy: 111111, updatedBy: 111111 },
