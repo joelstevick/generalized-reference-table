@@ -1,6 +1,7 @@
 import { BehaviorSubject, Subject } from "rxjs";
 import * as FileSaver from 'file-saver';
 import { findAll, getOmbObjectCodesDb, setOmbObjectCodesDb } from "src/app/db/omb-object-codes.db";
+import { OmbObjectCodeDeleteComponent } from "src/app/pages/individual-crud/omb-object-codes/omb-object-code-delete/omb-object-code-delete.component";
 export const ombObjectCodesConfig = {
     // private
     // stores required BehaviorSubject instances
@@ -24,31 +25,29 @@ export const ombObjectCodesConfig = {
         return this._context.pageRecords$.asObservable();
     },
     // ag-grid column metadata
-    columnDefs: async () => {
-        return [
-            {
-                headerName: 'Code',
-                field: 'code'
-            },
-            {
-                headerName: 'Description',
-                field: 'description'
-            },
-            {
-                headerName: 'OMB Object Group',
-                field: 'ombObjectGroup',
-                valueFormatter: (params) => params.value ? params.value.description : null
-            },
-            {
-                headerName: 'Created By',
-                field: 'createdBy'
-            },
-            {
-                headerName: 'Updated By',
-                field: 'updatedBy'
-            },
-        ]
-    },
+    columnDefs: [
+        {
+            headerName: 'Code',
+            field: 'code'
+        },
+        {
+            headerName: 'Description',
+            field: 'description'
+        },
+        {
+            headerName: 'OMB Object Group',
+            field: 'ombObjectGroup',
+            valueFormatter: (params) => params.value ? params.value.description : null
+        },
+        {
+            headerName: 'Created By',
+            field: 'createdBy'
+        },
+        {
+            headerName: 'Updated By',
+            field: 'updatedBy'
+        },
+    ],
     // user interface controls
     ui: {
         buttons: {
@@ -99,6 +98,9 @@ export const ombObjectCodesConfig = {
                     ombObjectCodesConfig.loadPage({start: 0, end: 10}, null, null)
                 }
             }
+        },
+        modals: {
+          delete: OmbObjectCodeDeleteComponent
         }
     }
 }

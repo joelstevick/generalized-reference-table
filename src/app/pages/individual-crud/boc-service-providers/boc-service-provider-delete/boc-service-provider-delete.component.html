@@ -1,0 +1,10 @@
+<ng-container cdkDrag cdkDragRootElement=".cdk-overlay-pane" >
+  <div class="row">
+    <h2 mat-dialog-title>Delete BOC Service Provider</h2>
+    <mat-dialog-content>Are you sure you want to delete the {{suffix}} BOC Service Provider?</mat-dialog-content>
+    <mat-dialog-actions>
+      <button mat-button mat-dialog-close>Cancel</button>
+      <button mat-button [mat-dialog-close]="true">Delete</button>
+    </mat-dialog-actions>
+  </div>
+</ng-container>

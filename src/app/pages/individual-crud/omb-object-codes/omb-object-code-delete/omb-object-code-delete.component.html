@@ -1,0 +1,12 @@
+<ng-container cdkDrag cdkDragRootElement=".cdk-overlay-pane" >
+  <div class="row">
+    <h2 mat-dialog-title>Delete OMB Object Code</h2>
+    <mat-dialog-content>Are you sure you want to delete the {{code}} OMB Object Code?</mat-dialog-content>
+    <mat-dialog-actions>
+      <button mat-button mat-dialog-close>Cancel</button>
+      <button mat-button [mat-dialog-close]="true">Delete</button>
+    </mat-dialog-actions>
+  </div>
+</ng-container>
+
+

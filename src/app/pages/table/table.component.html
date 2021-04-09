@@ -5,7 +5,7 @@
 <ag-grid-angular
     style="height: 315px;"
     class="ag-theme-balham"
-    (cellClicked)="openModal($event)"
+    (cellClicked)="openIndividualModal($event)"
     [rowData]="rowData"
     [columnDefs]="columnDefs">
 </ag-grid-angular>
@@ -16,6 +16,6 @@
 </app-paginator>
 <button
   style="float: right"
-  (click)="handleAddClick()">
+  (click)="openSharedForm()">
   {{createConfig.label}}
 </button>
