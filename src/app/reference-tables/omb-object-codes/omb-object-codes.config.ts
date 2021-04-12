@@ -1,7 +1,7 @@
 import { BehaviorSubject, Subject } from "rxjs";
 import * as FileSaver from 'file-saver';
 import { findAll, getOmbObjectCodesDb, setOmbObjectCodesDb } from "src/app/db/omb-object-codes.db";
-import { OmbObjectCodeDeleteComponent } from "src/app/pages/individual-crud/omb-object-codes/omb-object-code-delete/omb-object-code-delete.component";
+import { OmbObjectCodeDeleteComponent } from "src/app/reference-tables/omb-object-codes/modals/omb-object-code-delete/omb-object-code-delete.component";
 export const ombObjectCodesConfig = {
     // private
     // stores required BehaviorSubject instances

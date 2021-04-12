@@ -1,0 +1,24 @@
+<ng-container cdkDrag cdkDragRootElement=".cdk-overlay-pane" >
+  <div class="row">
+    <form [formGroup]="form">
+      <h2 mat-dialog-title>New</h2>
+      <mat-form-field>
+        <mat-label>{{ keyName }}</mat-label>
+        <textarea
+          formControlName="formField"
+          matInput
+          placeholder="Enter a {{ keyName }}"
+          [value]="record[keyName]"
+        ></textarea>
+      </mat-form-field>
+      <mat-dialog-actions>
+        <button
+          type="button"
+          (click)="handleSubmit()"
+          mat-raised-button>
+          Submit
+        </button>
+      </mat-dialog-actions>
+    </form>
+  </div>
+</ng-container>

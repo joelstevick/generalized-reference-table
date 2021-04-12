@@ -1,7 +1,7 @@
 import { BehaviorSubject, Subject } from "rxjs";
 import * as FileSaver from 'file-saver';
 import { getBocServiceProviderDb, setBocServiceProviderDb } from "src/app/db/boc-service-providers.db";
-import { BocServiceProviderDeleteComponent } from "src/app/pages/individual-crud/boc-service-providers/boc-service-provider-delete/boc-service-provider-delete.component";
+import { BocServiceProviderDeleteComponent } from "src/app/reference-tables/boc-service-providers/modals/boc-service-provider-delete/boc-service-provider-delete.component";
 
 const hide = (hidden: boolean) => {
     return hidden

@@ -3,6 +3,8 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Config } from 'src/app/config/config.interface';
+import { DeleteComponent } from '../shared-modals/delete/delete.component'
+import { FormComponent } from '../shared-modals/form/form.component';
 
 @Component({
   selector: 'app-table',
@@ -18,7 +20,9 @@ export class TableComponent implements OnInit, OnDestroy {
   updateConfig;
   deleteConfig;
   downloadConfig;
+
   deleteComponent;
+  formComponent;
 
   subscriptions = new Subscription();
 
@@ -34,8 +38,9 @@ export class TableComponent implements OnInit, OnDestroy {
         this.loadPage = config.loadPage.bind(config)
 
         // Set up callbacks/components, depending on implementation
+        this.setUpHandlers(config)
         this.setUpSharedCrud(config)
-        this.setUpIndividualCrud(config)
+        // this.setUpIndividualCrud(config)
 
         // Set column definitions
         this.columnDefs = config.columnDefs;
@@ -56,11 +61,16 @@ export class TableComponent implements OnInit, OnDestroy {
     )
   }
 
-  setUpSharedCrud(config) {
+  setUpHandlers(config) {
     this.createConfig = config.ui.buttons.create
     this.updateConfig = config.ui.buttons.update
     this.deleteConfig = config.ui.buttons.delete
     this.downloadConfig = config.ui.buttons.download
+  }
+
+  setUpSharedCrud(config) {
+    this.deleteComponent = DeleteComponent
+    this.formComponent = FormComponent
   }
 
   setUpIndividualCrud(config) {
@@ -72,32 +82,46 @@ export class TableComponent implements OnInit, OnDestroy {
     this.columnDefs.push({headerName: "Edit", field: "edit"})
   }
 
-  openSharedForm() {
-    const formData = prompt('Enter data')
-    this.createConfig.handler(formData);
+  openForm() {
+    // const formData = prompt('Enter data')
+    // this.createConfig.handler(formData);
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.data = {
+      addRecord: this.createConfig.handler
+    };
+
+    this.dialog.open(this.formComponent, dialogConfig)
   }
 
-  openSharedModal(event) {
-    const id = event.data.id
-    if (event.colDef.field === "delete") {
-      if (confirm(this.deleteConfig.label)) {
-        this.deleteConfig.handler(id)
-      }
-    } else if (event.colDef.field === "edit") {
-      const formData = prompt('Update', event.data[this.updateConfig.key])
-      this.updateConfig.handler(id, formData);
-    }
-  }
+  // openSharedModal(event) {
+  //   const id = event.data.id
+  //   if (event.colDef.field === "delete") {
+  //     if (confirm(this.deleteConfig.label)) {
+  //       this.deleteConfig.handler(id)
+  //     }
+  //   } else if (event.colDef.field === "edit") {
+  //     const formData = prompt('Update', event.data[this.updateConfig.key])
+  //     this.updateConfig.handler(id, formData);
+  //   }
+  // }
 
-  openIndividualModal(event) {
-    const recordData = event.data[this.updateConfig.key]
+  openModal(event) {
+    const recordData = {}
+    recordData[this.updateConfig.key] = event.data[this.updateConfig.key]
     const dialogConfig = new MatDialogConfig();
     dialogConfig.data = {
       recordData,
     };
 
     if (event.colDef.field === "delete") {
-      this.dialog.open(this.deleteComponent, dialogConfig)
+      this.dialog.open(this.deleteComponent, dialogConfig).afterClosed().subscribe((data) => {
+        console.log(data)
+        if (data) {
+          this.deleteConfig.handler(event.data.id)
+        }
+      })
+    } else if (event.colDef.field === "edit") {
+      this.dialog.open(this.formComponent, dialogConfig)
     }
   }
 
