@@ -26,8 +26,12 @@ let ombocs = [
 ];
 
 export function findAll(pageOptions: {start: number, end: number}, filterOptions, sortOptions) {
-  console.log(filterOptions);
-  return ombocs.slice(pageOptions.start, pageOptions.end)
+  return ombocs.slice(pageOptions.start, pageOptions.end).map(o => {
+    if (filterOptions.filter) {
+      delete o[filterOptions.filter];
+    }
+    return o;
+  })
 }
 
 export function getOmbObjectCodesDb() {
