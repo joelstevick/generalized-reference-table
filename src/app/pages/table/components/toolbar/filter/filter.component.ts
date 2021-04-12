@@ -12,7 +12,8 @@ export class FilterComponent implements OnInit {
   columnDefs: Record<string, any>[] = [];
   selected = '_';
 
-  constructor(public dialogRef: MatDialogRef<FilterComponent>,
+  constructor(
+    public dialogRef: MatDialogRef<FilterComponent>,
     @Inject(MAT_DIALOG_DATA) public data: { columnDefs: Record<string, any>[], selected: string | null }) { }
 
   ngOnInit(): void {
