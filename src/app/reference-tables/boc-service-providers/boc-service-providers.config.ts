@@ -14,7 +14,7 @@ export const bocServiceProvidersConfig = {
         pageRecords$: new BehaviorSubject<any[]>([]),
         filterChanged$: new Subject()
     },
-     // this is how data is retrieved from the (graphql) database
+    // this is how data is retrieved from the (graphql) database
     _getBocServiceProviders: function (pageOptions, filterOptions, sortOptions) {
         return getBocServiceProviderDb();
     },
@@ -72,58 +72,59 @@ export const bocServiceProvidersConfig = {
     ],
     // user interface controls
     ui: {
-      buttons: {
-          download: {
-              label: 'Download to Excel',
-              handler: function () {
-                  const data = JSON.stringify(getBocServiceProviderDb())
-                  const blob = new Blob([data], {
-                    type: "text/plain;charset=utf-8"
-                  });
-                  FileSaver.saveAs(blob, "bocserviceproviders")
-              },
-          },
-          create: {
-              label: `Add`,
-              handler: function (suffix) {
-                getBocServiceProviderDb().push({
-                      id: getBocServiceProviderDb().length + 1,
-                      number: null,
-                      suffix,
-                      name: '',
-                      longName: '',
-                      keyWords: '',
-                      narrative: '',
-                      createdBy: 111,
-                      updatedBy: 111,
-                  });
-                  bocServiceProvidersConfig.loadPage(null, null, null)
-              }
-          },
-          update: {
-            key: 'suffix',
-            handler: function (id, suffix) {
-              let updatedBocs = getBocServiceProviderDb().map(boc => {
-                if (boc.id === id) {
-                  boc.suffix = suffix
+        filterEnabled: false,
+        buttons: {
+            download: {
+                label: 'Download to Excel',
+                handler: function () {
+                    const data = JSON.stringify(getBocServiceProviderDb())
+                    const blob = new Blob([data], {
+                        type: "text/plain;charset=utf-8"
+                    });
+                    FileSaver.saveAs(blob, "bocserviceproviders")
+                },
+            },
+            create: {
+                label: `Add`,
+                handler: function (suffix) {
+                    getBocServiceProviderDb().push({
+                        id: getBocServiceProviderDb().length + 1,
+                        number: null,
+                        suffix,
+                        name: '',
+                        longName: '',
+                        keyWords: '',
+                        narrative: '',
+                        createdBy: 111,
+                        updatedBy: 111,
+                    });
+                    bocServiceProvidersConfig.loadPage(null, null, null)
                 }
-                return boc
-              })
-              setBocServiceProviderDb(updatedBocs)
-              bocServiceProvidersConfig.loadPage({start: 0, end: 10}, null, null)
+            },
+            update: {
+                key: 'suffix',
+                handler: function (id, suffix) {
+                    let updatedBocs = getBocServiceProviderDb().map(boc => {
+                        if (boc.id === id) {
+                            boc.suffix = suffix
+                        }
+                        return boc
+                    })
+                    setBocServiceProviderDb(updatedBocs)
+                    bocServiceProvidersConfig.loadPage({ start: 0, end: 10 }, null, null)
+                }
+            },
+            delete: {
+                label: 'Delete BOC Service Provider',
+                handler: function (id) {
+                    let bocServiceProviders = getBocServiceProviderDb().filter(boc => boc.id !== id)
+                    setBocServiceProviderDb(bocServiceProviders)
+                    bocServiceProvidersConfig.loadPage(null, null, null)
+                }
             }
-          },
-          delete: {
-              label: 'Delete BOC Service Provider',
-              handler: function (id) {
-                let bocServiceProviders = getBocServiceProviderDb().filter(boc => boc.id !== id)
-                setBocServiceProviderDb(bocServiceProviders)
-                bocServiceProvidersConfig.loadPage(null, null, null)
-              }
-          }
-      },
-      modals: {
-        delete: BocServiceProviderDeleteComponent
-      }
+        },
+        modals: {
+            delete: BocServiceProviderDeleteComponent
+        }
     }
 }

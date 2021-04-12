@@ -24,6 +24,7 @@ export class TableComponent implements OnInit, OnDestroy {
   filter: Filter;
   deleteComponent;
   formComponent;
+  filterEnabled = true;
 
   subscriptions = new Subscription();
 
@@ -38,6 +39,11 @@ export class TableComponent implements OnInit, OnDestroy {
       async (config: Config) => {
         // Passed to paginator
         this.loadPage = config.loadPage.bind(config)
+
+        // filter enabled?
+        if (typeof config.ui.filterEnabled !== 'undefined') {
+          this.filterEnabled = config.ui.filterEnabled;
+        }
 
         // Set up callbacks/components, depending on implementation
         this.setUpHandlers(config)

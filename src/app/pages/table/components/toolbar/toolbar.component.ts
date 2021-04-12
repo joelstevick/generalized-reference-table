@@ -10,6 +10,7 @@ import { Filter, FilterComponent } from './filter/filter.component';
 export class ToolbarComponent implements OnInit {
   @Input() buttons: any;
   @Input() columnDefs: Record<string, any>[];
+  @Input() filterEnabled = true;
 
   @Output() downloadClicked = new EventEmitter();
   @Output() filterChanged = new EventEmitter<Filter>();
@@ -33,8 +34,6 @@ export class ToolbarComponent implements OnInit {
     this.dialog.open(FilterComponent, dialogConfig).afterClosed().subscribe((filter) => {
       if (filter !== undefined) {
         this.filter = filter;
-
-        console.log(filter)
 
         this.filterChanged.emit(this.filter);
       }
