@@ -1,9 +1,5 @@
-<button>
-  Reset Filters
-</button>
-<button (click)="downloadClicked.emit()">
+<button mat-raised-button class="mat-primary" (click)="openFilterModal()">Filter</button>
+
+<button mat-raised-button class="mat-primary" (click)="downloadClicked.emit()">
   Export to Excel
-</button>
-<button>
-  Show/Hide Columns
 </button>

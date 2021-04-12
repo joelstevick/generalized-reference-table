@@ -1,21 +1,12 @@
-<app-toolbar
-(downloadClicked)="downloadConfig.handler()">
+<app-toolbar (downloadClicked)="downloadConfig.handler()">
 </app-toolbar>
 <br><br>
-<ag-grid-angular
-    style="height: 315px;"
-    class="ag-theme-balham"
-    (cellClicked)="openModal($event)"
-    [rowData]="rowData"
-    [columnDefs]="columnDefs">
+<ag-grid-angular style="height: 315px;" class="ag-theme-balham" (cellClicked)="openModal($event)" [rowData]="rowData"
+  [columnDefs]="columnDefs">
 </ag-grid-angular>
 <br>
-<app-paginator
-  *ngIf="pagination"
-  [loadPage]="loadPage">
+<app-paginator *ngIf="pagination" [loadPage]="loadPage">
 </app-paginator>
-<button
-  style="float: right"
-  (click)="openForm()">
+<button mat-raised-button class="mat-primary" style="float: right" (click)="openForm()">
   {{createConfig.label}}
 </button>

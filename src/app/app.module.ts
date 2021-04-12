@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AgGridModule } from 'ag-grid-angular';
 import { MatDialogModule } from '@angular/material/dialog';
+import {MatButtonModule} from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field'
 import { MatInputModule } from '@angular/material/input'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -35,6 +36,7 @@ import { FormComponent } from './pages/shared-modals/form/form.component';
     MatDialogModule,
     MatFormFieldModule,
     MatInputModule,
+    MatButtonModule,
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
