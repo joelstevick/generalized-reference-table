@@ -18,7 +18,6 @@ import { OmbObjectCodeDeleteComponent } from './reference-tables/omb-object-code
 import { BocServiceProviderDeleteComponent } from './reference-tables/boc-service-providers/modals/boc-service-provider-delete/boc-service-provider-delete.component';
 import { DeleteComponent } from './pages/shared-modals/delete/delete.component';
 import { FormComponent } from './pages/shared-modals/form/form.component';
-import { SortComponent } from './pages/table/components/toolbar/sort/sort.component';
 import { FilterComponent } from './pages/table/components/toolbar/filter/filter.component';
 
 @NgModule({
@@ -32,7 +31,6 @@ import { FilterComponent } from './pages/table/components/toolbar/filter/filter.
     BocServiceProviderDeleteComponent,
     DeleteComponent,
     FormComponent,
-    SortComponent,
     FilterComponent
   ],
   imports: [
