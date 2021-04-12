@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 
+const PageSize = 5;
 @Component({
   selector: 'app-paginator',
   templateUrl: './paginator.component.html',
@@ -8,7 +9,7 @@ import { Component, Input, OnInit } from '@angular/core';
 export class PaginatorComponent implements OnInit {
   @Input() loadPage: any;
   start: number = 0;
-  end: number = 10;
+  end: number = PageSize;
 
   constructor() { }
 
@@ -17,14 +18,14 @@ export class PaginatorComponent implements OnInit {
   }
 
   nextPage() {
-    this.start += 10;
-    this.end += 10
+    this.start += PageSize;
+    this.end += PageSize
     this.loadCurrentPage()
   }
 
   previousPage() {
-    this.start -= 10;
-    this.end -= 10
+    this.start -= PageSize;
+    this.end -= PageSize
     this.loadCurrentPage()
   }
 
