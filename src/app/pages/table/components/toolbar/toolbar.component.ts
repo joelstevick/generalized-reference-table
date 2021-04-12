@@ -28,6 +28,7 @@ export class ToolbarComponent implements OnInit {
       columnDefs: this.columnDefs,
       filter: this.filter,
     };
+    dialogConfig.disableClose = true;
     this.dialog.open(FilterComponent, dialogConfig).afterClosed().subscribe((filter) => {
       if (filter !== undefined) {
         this.filter = filter;
