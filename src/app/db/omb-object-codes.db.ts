@@ -26,6 +26,7 @@ let ombocs = [
 ];
 
 export function findAll(pageOptions: {start: number, end: number}, filterOptions, sortOptions) {
+  console.log(filterOptions);
   return ombocs.slice(pageOptions.start, pageOptions.end)
 }
 

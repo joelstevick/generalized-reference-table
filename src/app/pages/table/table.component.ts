@@ -20,7 +20,7 @@ export class TableComponent implements OnInit, OnDestroy {
   updateConfig;
   deleteConfig;
   downloadConfig;
-
+  filter: string;
   deleteComponent;
   formComponent;
 
@@ -128,6 +128,8 @@ export class TableComponent implements OnInit, OnDestroy {
   }
 
   onFilterChanged(filter: string) {
+
+    this.filter = filter;
 
   }
   ngOnDestroy() {
