@@ -2,10 +2,22 @@
 <mat-dialog-content>
     <mat-form-field appearance="fill">
         <mat-label>Field</mat-label>
-        <mat-select>
-          <mat-option *ngFor="let columnDef of columnDefs" [value]="columnDef.field">
-            {{columnDef.headerName}}
-          </mat-option>
+        <mat-select [(ngModel)]="filter">
+            <mat-option value="_">None</mat-option>
+            <mat-option *ngFor="let columnDef of data.columnDefs" [value]="columnDef.field">
+                {{columnDef.headerName}}
+            </mat-option>
         </mat-select>
-      </mat-form-field>
+    </mat-form-field>
+
+    <div>
+        <mat-form-field appearance="fill">
+            <mat-label>Value</mat-label>
+            <input matInput #value/>
+        </mat-form-field>
+    </div>
+    <mat-dialog-actions>
+        <button mat-button [mat-dialog-close]="">Cancel</button>
+        <button mat-button [mat-dialog-close]="{field: filter, value: value.value}">Save</button>
+    </mat-dialog-actions>
 </mat-dialog-content>

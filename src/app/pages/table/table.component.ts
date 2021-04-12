@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { Config } from 'src/app/config/config.interface';
 import { DeleteComponent } from '../shared-modals/delete/delete.component'
 import { FormComponent } from '../shared-modals/form/form.component';
+import { Filter } from './components/toolbar/filter/filter.component';
 
 @Component({
   selector: 'app-table',
@@ -20,9 +21,10 @@ export class TableComponent implements OnInit, OnDestroy {
   updateConfig;
   deleteConfig;
   downloadConfig;
-
+  filter: Filter;
   deleteComponent;
   formComponent;
+  filterEnabled = true;
 
   subscriptions = new Subscription();
 
@@ -37,6 +39,11 @@ export class TableComponent implements OnInit, OnDestroy {
       async (config: Config) => {
         // Passed to paginator
         this.loadPage = config.loadPage.bind(config)
+
+        // filter enabled?
+        if (typeof config.ui.filterEnabled !== 'undefined') {
+          this.filterEnabled = config.ui.filterEnabled;
+        }
 
         // Set up callbacks/components, depending on implementation
         this.setUpHandlers(config)
@@ -114,6 +121,11 @@ export class TableComponent implements OnInit, OnDestroy {
     }
   }
 
+  onFilterChanged(filter: Filter) {
+
+    this.filter = filter;
+
+  }
   ngOnDestroy() {
     this.subscriptions.unsubscribe();
   }

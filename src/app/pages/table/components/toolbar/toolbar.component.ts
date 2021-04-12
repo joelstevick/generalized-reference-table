@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { FilterComponent } from './filter/filter.component';
+import { Filter, FilterComponent } from './filter/filter.component';
 
 @Component({
   selector: 'app-toolbar',
@@ -10,24 +10,32 @@ import { FilterComponent } from './filter/filter.component';
 export class ToolbarComponent implements OnInit {
   @Input() buttons: any;
   @Input() columnDefs: Record<string, any>[];
+  @Input() filterEnabled = true;
 
-  @Output() downloadClicked = new EventEmitter()
+  @Output() downloadClicked = new EventEmitter();
+  @Output() filterChanged = new EventEmitter<Filter>();
+
+  filter: Filter | null = null;
 
   constructor(
     private dialog: MatDialog,
-    ) { }
+  ) { }
 
   ngOnInit(): void {
   }
 
   openFilterModal() {
     const dialogConfig = new MatDialogConfig();
-    dialogConfig.data = {columnDefs: this.columnDefs};
-
+    dialogConfig.data = {
+      columnDefs: this.columnDefs,
+      filter: this.filter,
+    };
+    dialogConfig.disableClose = true;
     this.dialog.open(FilterComponent, dialogConfig).afterClosed().subscribe((filter) => {
-      console.log(filter)
-      if (filter) {
-        
+      if (filter !== undefined) {
+        this.filter = filter;
+
+        this.filterChanged.emit(this.filter);
       }
     })
   }

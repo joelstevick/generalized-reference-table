@@ -1,11 +1,11 @@
-<app-toolbar (downloadClicked)="downloadConfig.handler()" [columnDefs]="columnDefs">
+<app-toolbar (downloadClicked)="downloadConfig.handler()" [columnDefs]="columnDefs" (filterChanged)="onFilterChanged($event)" [filterEnabled]="filterEnabled">
 </app-toolbar>
 <br><br>
 <ag-grid-angular style="height: 315px;" class="ag-theme-balham" (cellClicked)="openModal($event)" [rowData]="rowData"
   [columnDefs]="columnDefs">
 </ag-grid-angular>
 <br>
-<app-paginator *ngIf="pagination" [loadPage]="loadPage">
+<app-paginator *ngIf="pagination" [loadPage]="loadPage" [filter]="filter">
 </app-paginator>
 <button mat-raised-button class="mat-primary" style="float: right" (click)="openForm()">
   {{createConfig.label}}

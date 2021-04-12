@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Filter } from '../toolbar/filter/filter.component';
 
 const PageSize = 5;
 @Component({
@@ -6,8 +7,10 @@ const PageSize = 5;
   templateUrl: './paginator.component.html',
   styleUrls: ['./paginator.component.css']
 })
-export class PaginatorComponent implements OnInit {
+export class PaginatorComponent implements OnInit, OnChanges {
   @Input() loadPage: any;
+
+  @Input() filter: Filter;
 
   page = {
     start: 0,
@@ -15,6 +18,9 @@ export class PaginatorComponent implements OnInit {
   }
 
   constructor() { }
+  ngOnChanges(changes: SimpleChanges): void {
+   this.loadCurrentPage();
+  }
 
   ngOnInit(): void {
     this.loadCurrentPage()
@@ -33,7 +39,7 @@ export class PaginatorComponent implements OnInit {
   }
 
   loadCurrentPage() {
-    this.loadPage({ start: this.page.start, end: this.page.end }, {}, {})
+    this.loadPage({ start: this.page.start, end: this.page.end }, this.filter, {})
   }
 
 }
