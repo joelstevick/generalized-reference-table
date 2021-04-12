@@ -1,4 +1,4 @@
-<app-toolbar (downloadClicked)="downloadConfig.handler()" [columnDefs]="columnDefs">
+<app-toolbar (downloadClicked)="downloadConfig.handler()" [columnDefs]="columnDefs" (filterChanged)="onFilterChanged($event)">
 </app-toolbar>
 <br><br>
 <ag-grid-angular style="height: 315px;" class="ag-theme-balham" (cellClicked)="openModal($event)" [rowData]="rowData"

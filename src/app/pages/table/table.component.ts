@@ -127,6 +127,9 @@ export class TableComponent implements OnInit, OnDestroy {
     }
   }
 
+  onFilterChanged(filter: string) {
+
+  }
   ngOnDestroy() {
     this.subscriptions.unsubscribe();
   }

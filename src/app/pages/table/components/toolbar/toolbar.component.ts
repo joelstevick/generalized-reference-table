@@ -12,6 +12,7 @@ export class ToolbarComponent implements OnInit {
   @Input() columnDefs: Record<string, any>[];
 
   @Output() downloadClicked = new EventEmitter();
+  @Output() filterChanged = new EventEmitter<string>();
 
   filter: string | null = null;
 
@@ -32,6 +33,8 @@ export class ToolbarComponent implements OnInit {
     this.dialog.open(FilterComponent, dialogConfig).afterClosed().subscribe((filter) => {
       if (filter !== undefined) {
         this.filter = filter;
+
+        this.filterChanged.emit(this.filter);
       }
     })
   }
