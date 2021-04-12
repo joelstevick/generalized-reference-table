@@ -11,11 +11,11 @@ export class OmbObjectCodeDeleteComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<OmbObjectCodeDeleteComponent>,
-    @Inject(MAT_DIALOG_DATA) private data: { recordData: string }
+    @Inject(MAT_DIALOG_DATA) private data: { recordData }
   ) { }
 
   ngOnInit(): void {
-    this.code = this.data.recordData;
+    this.code = this.data.recordData.code;
   }
 
 }

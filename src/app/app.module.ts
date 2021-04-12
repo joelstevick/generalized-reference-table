@@ -20,6 +20,8 @@ import { DeleteComponent } from './pages/shared-modals/delete/delete.component';
 import { FormComponent } from './pages/shared-modals/form/form.component';
 import { SortComponent } from './pages/table/components/toolbar/sort/sort.component';
 import { FilterComponent } from './pages/table/components/toolbar/filter/filter.component';
+import { OmbObjectCodeFormComponent } from './reference-tables/omb-object-codes/modals/omb-object-code-form/omb-object-code-form.component';
+import { BocServiceProviderFormComponent } from './reference-tables/boc-service-providers/modals/boc-service-provider-form/boc-service-provider-form.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +35,9 @@ import { FilterComponent } from './pages/table/components/toolbar/filter/filter.
     DeleteComponent,
     FormComponent,
     SortComponent,
-    FilterComponent
+    FilterComponent,
+    OmbObjectCodeFormComponent,
+    BocServiceProviderFormComponent
   ],
   imports: [
     BrowserModule,

@@ -2,6 +2,7 @@ import { BehaviorSubject, Subject } from "rxjs";
 import * as FileSaver from 'file-saver';
 import { getBocServiceProviderDb, setBocServiceProviderDb } from "src/app/db/boc-service-providers.db";
 import { BocServiceProviderDeleteComponent } from "src/app/reference-tables/boc-service-providers/modals/boc-service-provider-delete/boc-service-provider-delete.component";
+import { BocServiceProviderFormComponent } from "./modals/boc-service-provider-form/boc-service-provider-form.component";
 
 const hide = (hidden: boolean) => {
     return hidden
@@ -123,7 +124,8 @@ export const bocServiceProvidersConfig = {
           }
       },
       modals: {
-        delete: BocServiceProviderDeleteComponent
+        delete: BocServiceProviderDeleteComponent,
+        form: BocServiceProviderFormComponent
       }
     }
 }

@@ -77,6 +77,7 @@ export class TableComponent implements OnInit, OnDestroy {
 
   setUpIndividualCrud(config) {
     this.deleteComponent = config.ui.modals.delete
+    this.formComponent = config.ui.modals.form
   }
 
   addButtonFields() {
@@ -85,27 +86,10 @@ export class TableComponent implements OnInit, OnDestroy {
   }
 
   openForm() {
-    // const formData = prompt('Enter data')
-    // this.createConfig.handler(formData);
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.data = {
-      addRecord: this.createConfig.handler
-    };
-
-    this.dialog.open(this.formComponent, dialogConfig)
+    this.dialog.open(this.formComponent).afterClosed().subscribe((data) => {
+      this.createConfig.handler(data)
+    })
   }
-
-  // openSharedModal(event) {
-  //   const id = event.data.id
-  //   if (event.colDef.field === "delete") {
-  //     if (confirm(this.deleteConfig.label)) {
-  //       this.deleteConfig.handler(id)
-  //     }
-  //   } else if (event.colDef.field === "edit") {
-  //     const formData = prompt('Update', event.data[this.updateConfig.key])
-  //     this.updateConfig.handler(id, formData);
-  //   }
-  // }
 
   openModal(event) {
     const recordData = {}
@@ -117,13 +101,16 @@ export class TableComponent implements OnInit, OnDestroy {
 
     if (event.colDef.field === "delete") {
       this.dialog.open(this.deleteComponent, dialogConfig).afterClosed().subscribe((data) => {
-        console.log(data)
         if (data) {
           this.deleteConfig.handler(event.data.id)
         }
       })
     } else if (event.colDef.field === "edit") {
-      this.dialog.open(this.formComponent, dialogConfig)
+      this.dialog.open(this.formComponent, dialogConfig).afterClosed().subscribe((data) => {
+        if (data) {
+          this.updateConfig.handler(event.data.id, data)
+        }
+      })
     }
   }
 

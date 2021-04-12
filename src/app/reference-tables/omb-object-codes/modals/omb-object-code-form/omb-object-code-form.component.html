@@ -1,0 +1,20 @@
+<ng-container cdkDrag cdkDragRootElement=".cdk-overlay-pane" >
+  <div class="row">
+    <form [formGroup]="ombForm">
+      <h2 mat-dialog-title>OMB Object Code Form</h2>
+      <mat-form-field>
+        <mat-label>Code</mat-label>
+        <textarea
+          formControlName="code"
+          matInput
+          placeholder="Enter a Code"
+          [value]="code"
+        ></textarea>
+      </mat-form-field>
+      <mat-dialog-actions>
+        <button mat-button mat-dialog-close>Cancel</button>
+        <button mat-button [mat-dialog-close]="getCode()">Submit</button>
+      </mat-dialog-actions>
+    </form>
+  </div>
+</ng-container>

@@ -11,11 +11,11 @@ export class BocServiceProviderDeleteComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<BocServiceProviderDeleteComponent>,
-    @Inject(MAT_DIALOG_DATA) private data: { recordData: string }
+    @Inject(MAT_DIALOG_DATA) private data: { recordData }
   ) { }
 
   ngOnInit(): void {
-    this.suffix = this.data.recordData;
+    this.suffix = this.data.recordData.suffix;
   }
 
 }
