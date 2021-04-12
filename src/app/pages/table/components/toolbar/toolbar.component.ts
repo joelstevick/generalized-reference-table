@@ -11,23 +11,26 @@ export class ToolbarComponent implements OnInit {
   @Input() buttons: any;
   @Input() columnDefs: Record<string, any>[];
 
-  @Output() downloadClicked = new EventEmitter()
+  @Output() downloadClicked = new EventEmitter();
+
+  filter: string | null = null;
 
   constructor(
     private dialog: MatDialog,
-    ) { }
+  ) { }
 
   ngOnInit(): void {
   }
 
   openFilterModal() {
     const dialogConfig = new MatDialogConfig();
-    dialogConfig.data = {columnDefs: this.columnDefs};
-
+    dialogConfig.data = {
+      columnDefs: this.columnDefs,
+      filter: this.filter,
+    };
     this.dialog.open(FilterComponent, dialogConfig).afterClosed().subscribe((filter) => {
-      console.log(filter)
-      if (filter) {
-        
+      if (filter !== undefined) {
+        this.filter = filter;
       }
     })
   }

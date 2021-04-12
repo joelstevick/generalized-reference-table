@@ -9,18 +9,15 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 })
 export class FilterComponent implements OnInit {
 
-  columnDefs: Record<string, any>[] = [];
-  selected = '_';
+  filter = '_';
 
   constructor(
     public dialogRef: MatDialogRef<FilterComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: { columnDefs: Record<string, any>[], selected: string | null }) { }
+    @Inject(MAT_DIALOG_DATA) public data: { columnDefs: Record<string, any>[], filter: string | null }) { }
 
   ngOnInit(): void {
-    console.log(this.data);
-    this.columnDefs = this.data.columnDefs;
-    if (this.data.selected) {
-      this.selected = this.data.selected;
+    if (this.data.filter) {
+      this.filter = this.data.filter;
     }
   }
 
