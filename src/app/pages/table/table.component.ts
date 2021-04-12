@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { Config } from 'src/app/config/config.interface';
 import { DeleteComponent } from '../shared-modals/delete/delete.component'
 import { FormComponent } from '../shared-modals/form/form.component';
+import { Filter } from './components/toolbar/filter/filter.component';
 
 @Component({
   selector: 'app-table',
@@ -20,7 +21,7 @@ export class TableComponent implements OnInit, OnDestroy {
   updateConfig;
   deleteConfig;
   downloadConfig;
-  filter: string;
+  filter: Filter;
   deleteComponent;
   formComponent;
 
@@ -127,7 +128,7 @@ export class TableComponent implements OnInit, OnDestroy {
     }
   }
 
-  onFilterChanged(filter: string) {
+  onFilterChanged(filter: Filter) {
 
     this.filter = filter;
 

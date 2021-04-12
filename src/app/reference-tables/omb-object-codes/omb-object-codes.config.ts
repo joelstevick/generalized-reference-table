@@ -10,13 +10,13 @@ export const ombObjectCodesConfig = {
         filterChanged$: new Subject()
     },
     // this is how data is retrieved from the (graphql) database
-    _getOmbObjectCodes: function (pageOptions, filterOptions, sortOptions) {
-        return findAll(pageOptions, filterOptions, sortOptions);
+    _getOmbObjectCodes: function (pageOptions, filterOptions) {
+        return findAll(pageOptions, filterOptions);
     },
     // public api
     // this function is called from the paginator when navigation events are signalled by the table
-    loadPage: function (pageOptions, filterOptions, sortOptions) {
-        const records: any[] = this._getOmbObjectCodes(pageOptions, filterOptions, sortOptions);
+    loadPage: function (pageOptions, filterOptions) {
+        const records: any[] = this._getOmbObjectCodes(pageOptions, filterOptions);
 
         this._context.pageRecords$.next(records);
     },
@@ -74,7 +74,7 @@ export const ombObjectCodesConfig = {
                         updatedBy: 111,
                     });
 
-                    ombObjectCodesConfig.loadPage(null, null, null)
+                    ombObjectCodesConfig.loadPage(null, null)
                 }
             },
             update: {
@@ -87,7 +87,7 @@ export const ombObjectCodesConfig = {
                   return omboc
                 })
                 setOmbObjectCodesDb(updatedOmbocs)
-                ombObjectCodesConfig.loadPage({start: 0, end: 10}, null, null)
+                ombObjectCodesConfig.loadPage({start: 0, end: 10}, null)
               }
             },
             delete: {
@@ -95,7 +95,7 @@ export const ombObjectCodesConfig = {
                 handler: function (id) {
                     let ombocs = getOmbObjectCodesDb().filter(omboc => omboc.id !== id)
                     setOmbObjectCodesDb(ombocs)
-                    ombObjectCodesConfig.loadPage({start: 0, end: 10}, null, null)
+                    ombObjectCodesConfig.loadPage({start: 0, end: 10}, null)
                 }
             }
         },

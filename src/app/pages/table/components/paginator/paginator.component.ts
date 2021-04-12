@@ -1,4 +1,5 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Filter } from '../toolbar/filter/filter.component';
 
 const PageSize = 5;
 @Component({
@@ -9,7 +10,7 @@ const PageSize = 5;
 export class PaginatorComponent implements OnInit, OnChanges {
   @Input() loadPage: any;
 
-  @Input() filter: string;
+  @Input() filter: Filter;
 
   page = {
     start: 0,
@@ -38,7 +39,7 @@ export class PaginatorComponent implements OnInit, OnChanges {
   }
 
   loadCurrentPage() {
-    this.loadPage({ start: this.page.start, end: this.page.end }, {filter: this.filter}, {})
+    this.loadPage({ start: this.page.start, end: this.page.end }, this.filter, {})
   }
 
 }

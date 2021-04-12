@@ -13,11 +13,11 @@
     <div>
         <mat-form-field appearance="fill">
             <mat-label>Value</mat-label>
-            <input matInput />
+            <input matInput #value/>
         </mat-form-field>
     </div>
     <mat-dialog-actions>
         <button mat-button [mat-dialog-close]="">Cancel</button>
-        <button mat-button [mat-dialog-close]="filter">Save</button>
+        <button mat-button [mat-dialog-close]="{field: filter, value: value.value}">Save</button>
     </mat-dialog-actions>
 </mat-dialog-content>

@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { FilterComponent } from './filter/filter.component';
+import { Filter, FilterComponent } from './filter/filter.component';
 
 @Component({
   selector: 'app-toolbar',
@@ -12,9 +12,9 @@ export class ToolbarComponent implements OnInit {
   @Input() columnDefs: Record<string, any>[];
 
   @Output() downloadClicked = new EventEmitter();
-  @Output() filterChanged = new EventEmitter<string>();
+  @Output() filterChanged = new EventEmitter<Filter>();
 
-  filter: string | null = null;
+  filter: Filter | null = null;
 
   constructor(
     private dialog: MatDialog,
@@ -33,6 +33,8 @@ export class ToolbarComponent implements OnInit {
     this.dialog.open(FilterComponent, dialogConfig).afterClosed().subscribe((filter) => {
       if (filter !== undefined) {
         this.filter = filter;
+
+        console.log(filter)
 
         this.filterChanged.emit(this.filter);
       }

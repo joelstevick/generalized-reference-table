@@ -1,13 +1,15 @@
+import { Filter } from "../pages/table/components/toolbar/filter/filter.component";
+
 export interface OmbObjectGroup {
-    description: string;
+  description: string;
 }
 export interface OmbObjectCode {
-    id: number;
-    code: string;
-    description: string;
-    ombObjectGroup: OmbObjectGroup;
-    createdBy: number;
-    updatedBy: number;
+  id: number;
+  code: string;
+  description: string;
+  ombObjectGroup: OmbObjectGroup;
+  createdBy: number;
+  updatedBy: number;
 }
 
 let ombocs = [
@@ -25,12 +27,11 @@ let ombocs = [
   { id: 12, code: "89.0", description: "Health", ombObjectGroup: { description: "Health" }, createdBy: 111111, updatedBy: 111111 },
 ];
 
-export function findAll(pageOptions: {start: number, end: number}, filterOptions, sortOptions) {
-  return ombocs.slice(pageOptions.start, pageOptions.end).map(o => {
-    if (filterOptions.filter) {
-      delete o[filterOptions.filter];
-    }
-    return o;
+export function findAll(pageOptions: { start: number, end: number }, filterOptions: Filter) {
+  console.log(filterOptions)
+  return ombocs.slice(pageOptions.start, pageOptions.end).filter(o => {
+    return !filterOptions ||
+      (o[filterOptions.field] && o[filterOptions.field].toLowerCase().indexOf(filterOptions.value.toLowerCase()) >= 0)
   })
 }
 
