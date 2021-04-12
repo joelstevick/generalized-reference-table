@@ -29,6 +29,7 @@ export class TableComponent implements OnInit, OnDestroy {
   constructor(
     private route: ActivatedRoute,
     private dialog: MatDialog,
+    private changeDetectorRef: ChangeDetectorRef
   ) { }
 
   ngOnInit() {
@@ -50,6 +51,7 @@ export class TableComponent implements OnInit, OnDestroy {
         this.subscriptions.add(config.pageRecords$().subscribe(records => {
           let rows = records.map(record => {return {...record, edit: "EDIT", delete: "DELETE"}})
           this.rowData = rows; // copy data in order for change detection to work properly
+          this.changeDetectorRef.detectChanges()
         }));
 
         // For ref areas that don't have pagination
