@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+
 
 @Component({
   selector: 'app-filter',
@@ -7,9 +9,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FilterComponent implements OnInit {
 
-  constructor() { }
+  constructor( public dialogRef: MatDialogRef<FilterComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: { columnDefs: Record<string, any>[] }) { }
 
   ngOnInit(): void {
+    console.log(this.data);
   }
 
 }
