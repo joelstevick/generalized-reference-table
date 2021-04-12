@@ -112,7 +112,7 @@ export const bocServiceProvidersConfig = {
                         return boc
                     })
                     setBocServiceProviderDb(updatedBocs)
-                    bocServiceProvidersConfig.loadPage({ start: 0, end: 10 }, null, null)
+                    bocServiceProvidersConfig.loadPage(null, null, null)
                 }
             },
             delete: {

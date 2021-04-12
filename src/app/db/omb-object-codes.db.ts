@@ -29,8 +29,7 @@ let ombocs = [
 
 export function findAll(pageOptions: { start: number, end: number }, filterOptions: Filter) {
   return ombocs.slice(pageOptions.start, pageOptions.end).filter(o => {
-    return !filterOptions ||
-      (o[filterOptions.field] && o[filterOptions.field].toLowerCase().indexOf(filterOptions.value.toLowerCase()) >= 0)
+    return !filterOptions || filterOptions?.field === "_" || (o[filterOptions.field] && o[filterOptions.field].toLowerCase().indexOf(filterOptions.value.toLowerCase()) >= 0)
   })
 }
 

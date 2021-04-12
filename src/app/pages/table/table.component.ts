@@ -3,6 +3,7 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Config } from 'src/app/config/config.interface';
+import { PaginationService } from 'src/app/services/pagination.service';
 import { DeleteComponent } from '../shared-modals/delete/delete.component'
 import { FormComponent } from '../shared-modals/form/form.component';
 import { Filter } from './components/toolbar/filter/filter.component';
@@ -31,6 +32,7 @@ export class TableComponent implements OnInit, OnDestroy {
   constructor(
     private route: ActivatedRoute,
     private dialog: MatDialog,
+    private paginationService: PaginationService,
     private changeDetectorRef: ChangeDetectorRef
   ) { }
 
@@ -47,8 +49,8 @@ export class TableComponent implements OnInit, OnDestroy {
 
         // Set up callbacks/components, depending on implementation
         this.setUpHandlers(config)
-        this.setUpSharedCrud(config)
-        // this.setUpIndividualCrud(config)
+        // this.setUpSharedCrud(config)
+        this.setUpIndividualCrud(config)
 
         // Set column definitions
         this.columnDefs = config.columnDefs;
@@ -95,6 +97,7 @@ export class TableComponent implements OnInit, OnDestroy {
   openForm() {
     this.dialog.open(this.formComponent).afterClosed().subscribe((data) => {
       this.createConfig.handler(data)
+      this.paginationService.recordsUpdated.next()
     })
   }
 
@@ -110,22 +113,24 @@ export class TableComponent implements OnInit, OnDestroy {
       this.dialog.open(this.deleteComponent, dialogConfig).afterClosed().subscribe((data) => {
         if (data) {
           this.deleteConfig.handler(event.data.id)
+          this.paginationService.recordsUpdated.next()
         }
       })
     } else if (event.colDef.field === "edit") {
       this.dialog.open(this.formComponent, dialogConfig).afterClosed().subscribe((data) => {
         if (data) {
           this.updateConfig.handler(event.data.id, data)
+          this.paginationService.recordsUpdated.next()
         }
       })
     }
   }
 
   onFilterChanged(filter: Filter) {
-
+    console.log(filter)
     this.filter = filter;
-
   }
+
   ngOnDestroy() {
     this.subscriptions.unsubscribe();
   }

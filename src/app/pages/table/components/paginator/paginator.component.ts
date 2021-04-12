@@ -1,5 +1,7 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import { Filter } from '../toolbar/filter/filter.component';
+import { Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { PaginationService } from 'src/app/services/pagination.service';
+import { FilterComponent } from '../toolbar/filter/filter.component';
 
 const PageSize = 5;
 @Component({
@@ -7,23 +9,30 @@ const PageSize = 5;
   templateUrl: './paginator.component.html',
   styleUrls: ['./paginator.component.css']
 })
-export class PaginatorComponent implements OnInit, OnChanges {
+export class PaginatorComponent implements OnInit, OnDestroy, OnChanges {
   @Input() loadPage: any;
+  @Input() filter: FilterComponent;
 
-  @Input() filter: Filter;
+  recordSubscription: Subscription;
 
   page = {
     start: 0,
     end: PageSize
   }
 
-  constructor() { }
+  constructor(
+    public service: PaginationService
+  ) { }
+
   ngOnChanges(changes: SimpleChanges): void {
    this.loadCurrentPage();
   }
 
   ngOnInit(): void {
     this.loadCurrentPage()
+    this.recordSubscription = this.service.recordsUpdated.subscribe(() => {
+      this.loadCurrentPage()
+    })
   }
 
   nextPage() {
@@ -40,6 +49,10 @@ export class PaginatorComponent implements OnInit, OnChanges {
 
   loadCurrentPage() {
     this.loadPage({ start: this.page.start, end: this.page.end }, this.filter, {})
+  }
+
+  ngOnDestroy() {
+    this.recordSubscription.unsubscribe()
   }
 
 }
