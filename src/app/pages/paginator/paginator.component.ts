@@ -8,8 +8,11 @@ const PageSize = 5;
 })
 export class PaginatorComponent implements OnInit {
   @Input() loadPage: any;
-  start: number = 0;
-  end: number = PageSize;
+
+  page = {
+    start: 0,
+    end: PageSize
+  }
 
   constructor() { }
 
@@ -18,19 +21,19 @@ export class PaginatorComponent implements OnInit {
   }
 
   nextPage() {
-    this.start += PageSize;
-    this.end += PageSize
+    this.page.start += PageSize;
+    this.page.end += PageSize
     this.loadCurrentPage()
   }
 
   previousPage() {
-    this.start -= PageSize;
-    this.end -= PageSize
+    this.page.start -= PageSize;
+    this.page.end -= PageSize
     this.loadCurrentPage()
   }
 
   loadCurrentPage() {
-    this.loadPage({start: this.start, end: this.end}, {}, {})
+    this.loadPage({ start: this.page.start, end: this.page.end }, {}, {})
   }
 
 }
