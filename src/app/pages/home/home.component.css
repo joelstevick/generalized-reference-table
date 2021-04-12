@@ -1,0 +1,11 @@
+a {
+    text-decoration: none;
+}
+
+li {
+    margin-bottom: 8px;
+}
+
+ul {
+    list-style-type: none; /* Remove bullets */
+}
