@@ -99,7 +99,6 @@ export const bocServiceProvidersConfig = {
                         createdBy: 111,
                         updatedBy: 111,
                     });
-                    bocServiceProvidersConfig.loadPage(null, null, null)
                 }
             },
             update: {
@@ -112,7 +111,6 @@ export const bocServiceProvidersConfig = {
                         return boc
                     })
                     setBocServiceProviderDb(updatedBocs)
-                    bocServiceProvidersConfig.loadPage(null, null, null)
                 }
             },
             delete: {
@@ -120,7 +118,6 @@ export const bocServiceProvidersConfig = {
                 handler: function (id) {
                     let bocServiceProviders = getBocServiceProviderDb().filter(boc => boc.id !== id)
                     setBocServiceProviderDb(bocServiceProviders)
-                    bocServiceProvidersConfig.loadPage(null, null, null)
                 }
             }
 

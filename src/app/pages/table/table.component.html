@@ -5,7 +5,7 @@
   [columnDefs]="columnDefs">
 </ag-grid-angular>
 <br>
-<app-paginator *ngIf="pagination" [loadPage]="loadPage" [filter]="filter">
+<app-paginator [loadPage]="loadPage" [filter]="filter" [visible]="pagination">
 </app-paginator>
 <button mat-raised-button class="mat-primary" style="float: right" (click)="openForm()">
   {{createConfig.label}}

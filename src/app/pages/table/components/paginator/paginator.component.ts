@@ -12,6 +12,7 @@ const PageSize = 5;
 export class PaginatorComponent implements OnInit, OnDestroy, OnChanges {
   @Input() loadPage: any;
   @Input() filter: FilterComponent;
+  @Input() visible = true;
 
   recordSubscription: Subscription;
 
