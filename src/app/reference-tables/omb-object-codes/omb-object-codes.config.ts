@@ -54,8 +54,8 @@ export const ombObjectCodesConfig = {
     ui: {
         buttons: {
             download: {
-                handler: function () {
-                  const data = JSON.stringify(getOmbObjectCodesDb())
+                handler: function (filter) {
+                  const data = JSON.stringify(findAll({start: 0, end: getOmbObjectCodesDb().length}, filter))
                   const blob = new Blob([data], {
                     type: "text/plain;charset=utf-8"
                   });

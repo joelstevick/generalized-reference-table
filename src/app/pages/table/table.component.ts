@@ -17,15 +17,18 @@ export class TableComponent implements OnInit, OnDestroy {
   columnDefs;
   rowData;
   pagination: boolean = true;
+
   loadPage;
   createConfig;
   updateConfig;
   deleteConfig;
   downloadConfig;
+
   filter: Filter;
-  deleteComponent;
-  formComponent;
   filterEnabled = true;
+
+  formComponent;
+  deleteComponent;
 
   subscriptions = new Subscription();
 
