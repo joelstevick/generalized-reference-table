@@ -68,7 +68,6 @@ export class TableComponent implements OnInit, OnDestroy {
 
         // For ref areas that don't have pagination
         if (config?.pagination === false) {
-          config.loadPage({ start: 0, end: 10 }, {}, {});
           this.pagination = false;
         }
       }
